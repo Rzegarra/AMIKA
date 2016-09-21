@@ -1,0 +1,14 @@
+{
+  "name": "tcpserver",
+  "version": "1.0.0",
+  "description": "pruebas de servidor que recibira datos por tcp del modulo sim800l",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rzh",
+  "license": "MIT",
+  "dependencies": {
+    "net": "^1.0.2"
+  }
+}
