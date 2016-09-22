@@ -24,7 +24,7 @@ server.on("connection",function(socket){
     
 })
 
-server.listen(8000, "10.0.2.10" ,function(){
+server.listen(8000 ,function(){
     console.log("server listen to %j",server.address())
 })
 
