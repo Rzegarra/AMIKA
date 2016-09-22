@@ -3,7 +3,7 @@ var colors = require("colors")
 var net = require("net")
 
 var HOST = '127.0.0.1'
-var PORT = 9000
+var PORT = 8000
 
 var client = null
 
@@ -72,6 +72,7 @@ function menu (){
     switch (lineRead){
         case '1':
             console.log('Option 1 selected')
+            OpenConnection()
             break
         case '2':
             var data = readlineSync.question('Enter data to send:')

@@ -6,14 +6,23 @@ index = fs.readFileSync(__dirname + '/index.html');
 
 var server = net.createServer()
 
+
+function ab2str(buf) {
+  return String.fromCharCode.apply(null, new Uint16Array(buf));
+}
+
+
 server.on("connection",function(socket){
     var remoteAddress = socket.remoteAddress + ":" +socket.remotePort
     console.log("new client connection is made %s",remoteAddress)
     io.sockets.emit('clientTCP', { address:remoteAddress })
 
     socket.on("data", function(d){
+        var data =  ab2str(d)
         console.log("data from %s: %s" , remoteAddress,d)
-        socket.write("hello "+ d);
+        io.sockets.emit('received', { data })
+        socket.write("received data ok  : "+ d);
+        io.sockets.emit('sent', { data })
     })
     socket.once("close",function(){
         console.log("connection from %s closed",remoteAddress)
@@ -21,7 +30,6 @@ server.on("connection",function(socket){
     socket.on("error",function(err){
         console.log("connection %s error: %s", remoteAddress)
     })
-    
 })
 
 server.listen(8000 ,function(){
@@ -41,7 +49,9 @@ var io = require('socket.io').listen(app);
 // Emit welcome message on connection
 io.sockets.on('connection', function(socket) {
     socket.emit('welcome', { message: 'Welcome!' });
-    socket.emit('time', { time: new Date().toJSON() });
+    socket.emit('time', { time: new Date().toISOString().
+                                    replace(/T/,' ').
+                                    replace(/\..+/,'') });
 
     socket.on('i am client', console.log);
 });

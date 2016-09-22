@@ -13,12 +13,22 @@
             });
             socket.on('time', function(data) {
                 console.log(data);
-                $('#messages').append(data.time+"br");
+                $('#messages').append(data.time+"<br>");
                 
             });
             socket.on('clientTCP', function(data) {
                 console.log(data);
-                $('#messages').append(data.address+"br");
+                $('#messages').append("coneccion desde : "+data.address+"<br>");
+                
+            });
+            socket.on('sent', function(data) {
+                console.log(data);
+                $('#messages').append("sent message : "+data.data+"<br>");
+                
+            });
+            socket.on('received', function(data) {
+                console.log(data);
+                $('#messages').append("received message : "+data.data+"<br>");
                 
             });
             socket.on('error', function() { console.error(arguments) });
