@@ -1,0 +1,277 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:ardupromini
+LIBS:gms-g9
+LIBS:minipro
+LIBS:minipro5v
+LIBS:sim800l
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L gms-g9 U?
+U 1 1 57D9ECAF
+P 3100 3950
+F 0 "U?" H 3100 3550 60  0000 C CNN
+F 1 "gms-g9" H 3100 4350 60  0000 C CNN
+F 2 "" H 3100 3550 60  0001 C CNN
+F 3 "" H 3100 3550 60  0001 C CNN
+	1    3100 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L SIM800L U?
+U 1 1 57D9ED1C
+P 3100 5300
+F 0 "U?" H 3100 5700 60  0000 C CNN
+F 1 "SIM800L" H 3100 4900 60  0000 C CNN
+F 2 "" H 3100 5700 60  0001 C CNN
+F 3 "" H 3100 5700 60  0001 C CNN
+	1    3100 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L LCD16X2 DS?
+U 1 1 57D9ED77
+P 7900 1900
+F 0 "DS?" H 7100 2300 50  0000 C CNN
+F 1 "LCD16X2" H 8600 2300 50  0000 C CNN
+F 2 "WC1602A" H 7900 1850 50  0000 C CIN
+F 3 "" H 7900 1900 50  0000 C CNN
+	1    7900 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L MINIPRO5V uP?
+U 1 1 57D9F64C
+P 3050 2100
+F 0 "uP?" H 3050 2000 60  0000 C CNN
+F 1 "MINIPRO5V" H 3050 1300 60  0000 C CNN
+F 2 "" H 3050 1300 60  0000 C CNN
+F 3 "" H 3050 1300 60  0000 C CNN
+	1    3050 2100
+	1    0    0    -1  
+$EndComp
+Text GLabel 2550 4000 0    60   Input ~ 0
+Tx0
+Text GLabel 2550 4100 0    60   Input ~ 0
+Rx0
+$Comp
+L R R?
+U 1 1 57DA0D9A
+P 1700 2100
+F 0 "R?" V 1780 2100 50  0000 C CNN
+F 1 "R" V 1700 2100 50  0000 C CNN
+F 2 "" V 1630 2100 50  0000 C CNN
+F 3 "" H 1700 2100 50  0000 C CNN
+	1    1700 2100
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 57DA0E27
+P 1450 2100
+F 0 "R?" V 1530 2100 50  0000 C CNN
+F 1 "R" V 1450 2100 50  0000 C CNN
+F 2 "" V 1380 2100 50  0000 C CNN
+F 3 "" H 1450 2100 50  0000 C CNN
+	1    1450 2100
+	1    0    0    -1  
+$EndComp
+Text GLabel 4550 4550 0    60   Input ~ 0
+Tx0
+Text GLabel 4550 4350 0    60   Input ~ 0
+Rx0
+$Comp
+L +3.3V #PWR?
+U 1 1 57DA0F8A
+P 1150 3450
+F 0 "#PWR?" H 1150 3300 50  0001 C CNN
+F 1 "+3.3V" H 1150 3590 50  0000 C CNN
+F 2 "" H 1150 3450 50  0000 C CNN
+F 3 "" H 1150 3450 50  0000 C CNN
+	1    1150 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Earth #PWR?
+U 1 1 57DA0FAA
+P 1350 4150
+F 0 "#PWR?" H 1350 3900 50  0001 C CNN
+F 1 "Earth" H 1350 4000 50  0001 C CNN
+F 2 "" H 1350 4150 50  0000 C CNN
+F 3 "" H 1350 4150 50  0000 C CNN
+	1    1350 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 57DA1030
+P 1450 3800
+F 0 "C?" H 1475 3900 50  0000 L CNN
+F 1 "C" H 1475 3700 50  0000 L CNN
+F 2 "" H 1488 3650 50  0000 C CNN
+F 3 "" H 1450 3800 50  0000 C CNN
+	1    1450 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 57DA109F
+P 1750 3800
+F 0 "C?" H 1775 3900 50  0000 L CNN
+F 1 "C" H 1775 3700 50  0000 L CNN
+F 2 "" H 1788 3650 50  0000 C CNN
+F 3 "" H 1750 3800 50  0000 C CNN
+	1    1750 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 57E011BC
+P 7350 2550
+F 0 "R?" V 7430 2550 50  0000 C CNN
+F 1 "R" V 7350 2550 50  0000 C CNN
+F 2 "" V 7280 2550 50  0000 C CNN
+F 3 "" H 7350 2550 50  0000 C CNN
+	1    7350 2550
+	1    0    0    -1  
+$EndComp
+Text GLabel 8450 2800 3    60   Input ~ 0
+D7
+Text GLabel 8350 2800 3    60   Input ~ 0
+D6
+Text GLabel 8250 2800 3    60   Input ~ 0
+D5
+Text GLabel 8150 2800 3    60   Input ~ 0
+D4
+$Comp
+L +5V #PWR?
+U 1 1 57E01353
+P 7950 3450
+F 0 "#PWR?" H 7950 3300 50  0001 C CNN
+F 1 "+5V" H 7950 3590 50  0000 C CNN
+F 2 "" H 7950 3450 50  0000 C CNN
+F 3 "" H 7950 3450 50  0000 C CNN
+	1    7950 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 57E01382
+P 8650 3050
+F 0 "#PWR?" H 8650 2800 50  0001 C CNN
+F 1 "GND" H 8650 2900 50  0000 C CNN
+F 2 "" H 8650 3050 50  0000 C CNN
+F 3 "" H 8650 3050 50  0000 C CNN
+	1    8650 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 57E013C8
+P 7150 3050
+F 0 "#PWR?" H 7150 2800 50  0001 C CNN
+F 1 "GND" H 7150 2900 50  0000 C CNN
+F 2 "" H 7150 3050 50  0000 C CNN
+F 3 "" H 7150 3050 50  0000 C CNN
+	1    7150 3050
+	1    0    0    -1  
+$EndComp
+Text GLabel 7450 3000 3    60   Input ~ 0
+RS
+Text GLabel 7650 3050 3    60   Input ~ 0
+E
+Wire Wire Line
+	7450 2400 7450 3000
+Wire Wire Line
+	7650 2400 7650 3050
+Wire Wire Line
+	8150 2400 8150 2800
+Wire Wire Line
+	8250 2400 8250 2800
+Wire Wire Line
+	8350 2400 8350 2800
+Wire Wire Line
+	8450 2400 8450 2800
+Wire Wire Line
+	8650 2400 8650 3050
+Wire Wire Line
+	8550 3600 8550 2400
+Wire Wire Line
+	7250 3600 8550 3600
+Wire Wire Line
+	7950 3600 7950 3450
+Wire Wire Line
+	7250 2400 7250 3600
+Connection ~ 7950 3600
+Wire Wire Line
+	7150 3050 7150 2400
+NoConn ~ 8050 2400
+NoConn ~ 7950 2400
+NoConn ~ 7850 2400
+NoConn ~ 7750 2400
+$Comp
+L GND #PWR?
+U 1 1 57E0154A
+P 7350 3300
+F 0 "#PWR?" H 7350 3050 50  0001 C CNN
+F 1 "GND" H 7350 3150 50  0000 C CNN
+F 2 "" H 7350 3300 50  0000 C CNN
+F 3 "" H 7350 3300 50  0000 C CNN
+	1    7350 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 57E01570
+P 7550 2400
+F 0 "#PWR?" H 7550 2150 50  0001 C CNN
+F 1 "GND" H 7550 2250 50  0000 C CNN
+F 2 "" H 7550 2400 50  0000 C CNN
+F 3 "" H 7550 2400 50  0000 C CNN
+	1    7550 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7350 2700 7350 3300
+$EndSCHEMATC
