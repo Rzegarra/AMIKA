@@ -56,4 +56,6 @@ io.sockets.on('connection', function(socket) {
     socket.on('i am client', console.log);
 });
 
-app.listen(3000);
+app.listen(3000,function(){
+   
+});
