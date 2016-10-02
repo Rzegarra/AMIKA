@@ -12,13 +12,14 @@ String _Data="";
 String _Latitude="-16.409047";
 String _Longitude="-71.537451";
 
+//FUNCION para ver en consola lo que se envia y recibe
 void respuesta(){
  while (sim800.available())
     Serial.write(sim800.read());
   Serial.flush();
   sim800.flush();
 }
-
+//****************************************************
 
 // FUNCION para sacar el imei del dispositivo y usar este como id 
 void imei(){
@@ -49,6 +50,30 @@ void imei(){
 
 void f_json(String Imei,String Lat,String Long){
   _Data="{\"id\":\""+Imei+"\",\"lat\":\""+Lat+"\",\"long\":\""+Long+"\"}";
+}
+
+void f_SendPost()
+{
+   imei();
+   delay(100);
+   sim800.println("AT+SAPBR=3,1,\"APN\",\"CMNET\"");
+   delay(500);
+   respuesta();
+   sim800.println("AT+SAPBR=1,1");
+   delay(5000);
+   respuesta();
+   sim800.println("AT+HTTPINIT");
+   delay(500);
+   respuesta();
+   sim800.println("AT+HTTPPARA=\"CID\",1");
+   delay(100);
+   respuesta();
+   sim800.println("AT+HTTPPARA=\"URL\",\"http://nodeamica-demo.herokuapp.com/\"");
+   delay(150);
+   respuesta();
+   sim800.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");
+   delay(3000);
+   respuesta();
 }
 
 //void AT_ok(String a)
@@ -96,27 +121,8 @@ void setup()
  sim800.begin(4800);
  Serial.println("esperando a que cargue");
  delay(2000);
- imei();
- delay(100);
- sim800.println("AT+SAPBR=3,1,\"APN\",\"CMNET\"");
- delay(500);
- respuesta();
- sim800.println("AT+SAPBR=1,1");
- delay(5000);
- respuesta();
- sim800.println("AT+HTTPINIT");
- delay(500);
- respuesta();
- sim800.println("AT+HTTPPARA=\"CID\",1");
- delay(100);
- respuesta();
- sim800.println("AT+HTTPPARA=\"URL\",\"http://nodeamica-demo.herokuapp.com/\"");
- delay(150);
- respuesta();
- sim800.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");
- delay(3000);
- respuesta();
  
+ f_SendPost();
  f_json(id,_Latitude,_Longitude);
  Serial.print("data = ");
  Serial.println(_Data);
