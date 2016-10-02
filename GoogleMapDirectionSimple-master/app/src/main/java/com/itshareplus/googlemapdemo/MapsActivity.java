@@ -62,7 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 sendRequest();
             }
         });
-    }
+}
 
     private void sendRequest() {
         String origin = etOrigin.getText().toString();

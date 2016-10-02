@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Vego</string>
+    <string name="title_activity_maps">VegoMap</string>
+</resources>
