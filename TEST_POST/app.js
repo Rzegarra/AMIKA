@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function (req, res, next) {
   console.log(req.body) // populated!
-  res.send('llego ok '+req.body[0])
+  res.send('llego ok '+req.body)
   next()
 })
 app.listen(port);

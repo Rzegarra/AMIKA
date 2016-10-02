@@ -1,0 +1,51 @@
+AT+SAPBR=3,1,"APN","CMNET"   
+AT+SAPBR=1,1
+AT+SAPBR=2,1
+
+AT+HTTPINIT
+AT+HTTPPARA="CID",1
+AT+HTTPPARA="URL","http://nodeamica-demo.herokuapp.com/po"
+AT+HTTPACTION=0
+AT+HTTPREAD
+AT+HTTPTERM
+
+AT+SAPBR=0,1
+
+
+3.3. HTTP POST Method
+Upload data to HTTP server. Grammar Description
+    -----------------------------------------------------------------------------------------
+    AT+HTTPINIT                     Init HTTP service
+    OK                        
+    -----------------------------------------------------------------------------------------      
+    AT+HTTPPARA = “CID”,1           Set parameters for HTTP session
+    OK
+    AT+HTTPPARA=“URL”,”www.sim.com”
+    OK                              
+    -----------------------------------------------------------------------------------------
+    AT+HTTPDATA=100,10000           POST the data whose size is 100 Bytes and 
+    DOWNLOAD                        the maximum latency time for inputting is 
+                                    10000 ms.It is recommended to set the latency.
+                                    time long enough to allow downloading all the 
+                                    data.It is ready to receive data from UART, 
+                                    and DCD has been set to low.    
+    OK                              All data has been received over, and DCD is set to high.
+    -----------------------------------------------------------------------------------------
+    AT+HTTPACTION=1                 POST session start
+    OK                              
+    +HTTPACTION: 1,200,0            POST successfully
+    -----------------------------------------------------------------------------------------
+    AT+HTTPTERM                     Terminate HTTP service
+    OK
+
+
+11.1 Overview
+Command Description
+AT+HTTPINIT         INITIALIZE HTTP SERVICE
+AT+HTTPTERM         TERMINATE HTTP SERVICE
+AT+HTTPPARA         SET HTTP PARAMETERS VALUE
+AT+HTTPDATA         INPUT HTTP DATA
+AT+HTTPACTION       HTTP METHOD ACTION
+AT+HTTPREAD         READ THE HTTP SERVER RESPONSE
+AT+HTTPSCONT        SAVE HTTP APPLICATION CONTEXT
+AT+HTTPSTATUS       READ HTTP STATUS
