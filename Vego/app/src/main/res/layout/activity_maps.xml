@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cesar.vego.MapsActivity"
+
+    tools:context="com.itshareplus.googlemapdemo.MapsActivity"
     android:orientation="vertical">
 
     <EditText
@@ -12,10 +13,12 @@
         android:layout_height="wrap_content"
         android:hint="Enter destination address"
         android:id="@+id/etDestination" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+
             >
         <Button
                 android:layout_width="wrap_content"
@@ -25,18 +28,39 @@
             android:allowUndo="false"
             android:background="#efdc7c"
              />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rgroup">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start"
+                android:onClick="rbclick"
+                android:id="@+id/StartButton"
+                android:checked="false" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End"
+                android:onClick="rbclick"
+                android:id="@+id/EndButton"
+                android:checked="false" />
+
+        </RadioGroup>
+
+
         <!---   <ImageView
                    android:layout_marginLeft="20dp"
                    android:layout_marginTop="5dp"
                    android:layout_width="40dp"
                    android:layout_height="40dp"
-                   android:src="@drawable/ic_distance"/>-->
-           <TextView
-                   android:layout_marginLeft="5dp"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="0 km"
-                   android:id="@+id/tvDistance" />
+                   android:src="@drawable/ic_distance"/>
+                     <!- tools:context="com.example.cesar.vego.MapsActivity" -->
+
+
 
         <!---   <ImageView
                    android:layout_marginLeft="20dp"
@@ -45,17 +69,17 @@
                    android:layout_height="40dp"
                    android:padding="5dp"
                    android:src="@drawable/ic_clock"/>-->
-           <TextView
-                   android:layout_marginLeft="5dp"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="0 min"
-                   android:id="@+id/tvDuration" />
-       </LinearLayout>
-       <fragment
+
+
+
+
+    </LinearLayout>
+
+
+    <fragment
            android:id="@+id/map"
            android:name="com.google.android.gms.maps.SupportMapFragment"
            android:layout_width="match_parent"
            android:layout_height="match_parent" />
 
-       </LinearLayout>
+</LinearLayout>

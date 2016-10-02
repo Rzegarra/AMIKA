@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
@@ -46,6 +48,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<Marker> originMarkers = new ArrayList<>(); // marker de inico sera de color Verde
     private List<Marker> destinationMarkers = new ArrayList<>();// marker de llegada de color Negro
     private ProgressDialog progressDialog;
+
+    private RadioGroup rg;
+    private RadioButton rb;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -74,6 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        rg =(RadioGroup) findViewById(R.id.rgroup);
     }
 /*
     private void sendRequest (){
@@ -151,6 +158,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         client.disconnect();
     }
 
+
+
+    public void rbclick(View v)
+    {
+        int radionButtonId = rg.getCheckedRadioButtonId();
+        rb = (RadioButton)findViewById(radionButtonId);
+        Toast.makeText(getBaseContext(),rb.getText(),Toast.LENGTH_LONG).show();
+    }
 
     /**
      * Manipulates the map once available.
