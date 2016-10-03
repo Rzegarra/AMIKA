@@ -48,6 +48,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<Marker> originMarkers = new ArrayList<>(); // marker de inico sera de color Verde
     private List<Marker> destinationMarkers = new ArrayList<>();// marker de llegada de color Negro
     private ProgressDialog progressDialog;
+    private Marker markerOrigin;
+    private Marker markerDestintion;
+
 
     private RadioGroup rg;
     private RadioButton rb;
@@ -99,11 +102,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         LatLng hcmus = new LatLng(-16.3900397, -71.5356918);
+        LatLng hcmus_2 = new LatLng(-16.3921694, -71.5357161);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hcmus, 15));
-        originMarkers.add(mMap.addMarker(new MarkerOptions()
-                .title("You are here")
+        /*originMarkers.add(mMap.addMarker(new MarkerOptions()
+                .title("You are Aqui")
                 .position(hcmus)
+                .draggable(true)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+            */
+        markerOrigin = mMap.addMarker(new MarkerOptions()
+                .title("You are Aqui")
+                .position(hcmus)
+                .draggable(true)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+        markerDestintion = mMap.addMarker(new MarkerOptions()
+                .title("You are here")
+                .position(hcmus_2)
+                .draggable(true)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
