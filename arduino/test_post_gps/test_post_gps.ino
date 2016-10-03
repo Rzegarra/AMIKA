@@ -31,7 +31,7 @@ void setup()
  
  // Open serial communications and wait for port to open:
  Serial.begin(9600);
-  uart_gps.begin(9600);
+ uart_gps.begin(9600);
  sim800.begin(4800);
 
  Serial.println("esperando a que cargue");
@@ -43,6 +43,7 @@ void setup()
  lcd.setCursor(1, 0);
  lcd.print(id);
  f_ConfigPost();
+ 
 
 //// Serial.println("{\"id\":\"860719024889580\",\"lat\":\"-16.409047\",\"long\":\"-71.537451\"}");
 ////String nuevo="{\"id\":\"860719024889580\",\"lat\":\"-16.409047\",\"long\":\"-71.537451\"}";
@@ -76,15 +77,17 @@ void setup()
 void loop() // run over and over
 
 {
+   
    f_SendPost();
-//   uart_gps.listen();
-//   getgps(gps);         // then grab the data.
-//   smartdelay(1000);
+   
+   getgps(gps);         // then grab the data.
+   smartdelay(1000);
+   
 }
 
 void getgps(TinyGPS &gps)
 {
-
+  uart_gps.listen(); 
   float latitude, longitude;
   gps.f_get_position(&latitude, &longitude);
   lcd.setCursor(0, 1);
@@ -95,6 +98,9 @@ void getgps(TinyGPS &gps)
   lcd.setCursor(8, 1);
   Serial.println(longitude,5);
   lcd.print(longitude,5);
+   _Latitude=latitude;
+   _Longitude=longitude;
+   _Vel=gps.f_speed_kmph();
   
   int year;
   byte month, day, hour, minute, second, hundredths;
@@ -118,12 +124,22 @@ static void smartdelay(unsigned long ms)
   while (millis() - start < ms);
 }
 
+static void Stop(unsigned long ms)
+{
+  unsigned long start = millis();   
+  while (millis() - start < ms);
+    {
+      if (sim800.available())
+        while (sim800.available())
+          Serial.write(sim800.read());
+    }    
+}
+
 //FUNCION para ver en consola lo que se envia y recibe
 void respuesta(){
  while (sim800.available())
     Serial.write(sim800.read());
-  Serial.flush();
-  sim800.flush();
+
 }
 //****************************************************
 
@@ -173,23 +189,23 @@ void f_ConfigPost()
 {
    sim800.listen();
    sim800.println("AT+SAPBR=3,1,\"APN\",\"CMNET\"");
-   delay(500);
-   respuesta();
+   Stop(500);
+  
    sim800.println("AT+SAPBR=1,1");
-   delay(5000);
-   respuesta();
+   Stop(3000);
+  
    sim800.println("AT+HTTPINIT");
-   delay(500);
-   respuesta();
+   Stop(500);
+  
    sim800.println("AT+HTTPPARA=\"CID\",1");
-   delay(100);
-   respuesta();
+   Stop(100);
+  
    sim800.println("AT+HTTPPARA=\"URL\",\"http://nodeamica-demo.herokuapp.com/\"");
-   delay(150);
-   respuesta();
+   Stop(150);
+  
    sim800.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");
-   delay(3000);
-   respuesta();
+   Stop(3000);
+  
 }
 
 void f_SendPost()
@@ -200,17 +216,17 @@ void f_SendPost()
   delay(20);
   Serial.println(_Data);
   sim800.println("aT+HTTPDATA=100,10000");
-  delay(3000);
-  respuesta();
+  Stop(3000);
+
   sim800.println(_Data);
-  delay(10000);
-  respuesta();
+  Stop(10000);
+
   sim800.println("AT+HTTPACTION=1");
-  delay(5000);
-  respuesta();
+  Stop(5000);
+
   sim800.println("AT+HTTPREAD");
-  delay(1000);
-  respuesta();
+  Stop(1000);
+
 }
 //void AT_ok(String a)
 //{

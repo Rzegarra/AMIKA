@@ -55,25 +55,26 @@ void f_json(String Imei,String Lat,String Long){
 void f_SendPost()
 {
    imei();
-   delay(100);
+   Stop(100);
    sim800.println("AT+SAPBR=3,1,\"APN\",\"CMNET\"");
-   delay(500);
-   respuesta();
+   Stop(500);
+   
    sim800.println("AT+SAPBR=1,1");
    delay(5000);
-   respuesta();
+   Stop(100);
+   
    sim800.println("AT+HTTPINIT");
-   delay(500);
-   respuesta();
+   Stop(500);
+   
    sim800.println("AT+HTTPPARA=\"CID\",1");
-   delay(100);
-   respuesta();
+   Stop(100);
+   
    sim800.println("AT+HTTPPARA=\"URL\",\"http://nodeamica-demo.herokuapp.com/\"");
-   delay(150);
-   respuesta();
+   Stop(150);
+   
    sim800.println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");
-   delay(3000);
-   respuesta();
+   Stop(3000);
+   
 }
 
 //void AT_ok(String a)
@@ -132,37 +133,37 @@ void setup()
 //  Serial.print("son la MISMA M..");
 // delay(20);
  sim800.println("aT+HTTPDATA=80,10000");
- delay(3000);
- respuesta();
+ Stop(3000);
+ 
  //sim800.println("{\"id\":\"860719024889580\",\"lat\":\"-16.409047\",\"long\":\"-71.537451\"}");
 // sim800.println("{\"id\":\""+id+"\"}");
  sim800.println(_Data);
- delay(10000);
- respuesta();
+ Stop(10000);
+ 
  sim800.println("AT+HTTPACTION=1");
- delay(5000);
- respuesta();
+ Stop(5000);
+ 
  sim800.println("AT+HTTPREAD");
- delay(1000);
- respuesta();
+ Stop(1000);
+ 
   sim800.println("aT+HTTPDATA=40,10000");
- delay(3000);
- respuesta();
+ Stop(3000);
+ 
  sim800.println("{\"OOO\": \"joder\"}");
- delay(9000);
- respuesta();
+ Stop(9000);
+ 
  sim800.println("AT+HTTPACTION=1");
- delay(5000);
- respuesta();
+ Stop(5000);
+ 
  sim800.println("AT+HTTPREAD");
- delay(1000);
- respuesta();
+ Stop(1000);
+ 
  sim800.println("AT+HTTPTERM");
- delay(1000);
- respuesta();
+ Stop(1000);
+ 
  sim800.println("AT+SAPBR=0,1");
- delay(1000);
- respuesta();
+ Stop(1000);
+ 
 }
 void loop() // run over and over
 {
@@ -179,3 +180,14 @@ void loop() // run over and over
  }
 }
 
+static void Stop(unsigned long ms)
+{
+  unsigned long start = millis();   
+  while (millis() - start < ms);
+    {
+      if (sim800.available())
+        while (sim800.available())
+          Serial.write(sim800.read());
+    }
+      
+}
