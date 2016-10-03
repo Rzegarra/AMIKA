@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Encontrar Ruta"
+                android:onClick="findPath"
                 android:id="@+id/btnFindPath"
             android:allowUndo="false"
             android:background="#efdc7c"

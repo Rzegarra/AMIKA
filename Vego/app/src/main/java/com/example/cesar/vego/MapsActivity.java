@@ -1,6 +1,7 @@
 package com.example.cesar.vego;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.graphics.Path;
 import android.net.Uri;
@@ -35,6 +36,8 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import android.content.DialogInterface;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -184,6 +187,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(getBaseContext(),rb.getText(),Toast.LENGTH_LONG).show();
     }
 
+    public void findPath(View v)
+    {
+        String mensage ="Ubicacion: "+ markerOrigin.getPosition().longitude+"-"+markerOrigin.getPosition().latitude;
+        new AlertDialog.Builder(this)
+                .setTitle("Delete entry")
+                .setMessage(mensage)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
