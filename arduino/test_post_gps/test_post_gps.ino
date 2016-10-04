@@ -28,12 +28,10 @@ String _Vel="0.015";
 
 void setup()
 {
- 
  // Open serial communications and wait for port to open:
  Serial.begin(9600);
  uart_gps.begin(9600);
  sim800.begin(4800);
-
  Serial.println("esperando a que cargue");
  delay(2000);
  imei();
@@ -77,12 +75,9 @@ void setup()
 void loop() // run over and over
 
 {
-   
    f_SendPost();
-   
    getgps(gps);         // then grab the data.
    smartdelay(1000);
-   
 }
 
 void getgps(TinyGPS &gps)
@@ -134,12 +129,10 @@ static void Stop(unsigned long ms)
           Serial.write(sim800.read());
     }    
 }
-
 //FUNCION para ver en consola lo que se envia y recibe
 void respuesta(){
  while (sim800.available())
     Serial.write(sim800.read());
-
 }
 //****************************************************
 
@@ -149,14 +142,12 @@ void imei(){
   delay(300);
   while (sim800.available())
  {
-  
       if(c=='\n')
         temp++; 
       if( temp==1)
         recepcion+=c;
       c=sim800.read();
       Serial.print(c);
-        
  } 
   temp=0;
   recepcion.replace("\n","");
@@ -216,7 +207,7 @@ void f_SendPost()
   delay(20);
   Serial.println(_Data);
   sim800.println("aT+HTTPDATA=100,10000");
-  Stop(3000);
+  Stop(3500);
 
   sim800.println(_Data);
   Stop(10000);
@@ -225,7 +216,7 @@ void f_SendPost()
   Stop(5000);
 
   sim800.println("AT+HTTPREAD");
-  Stop(1000);
+  Stop(2000);
 
 }
 //void AT_ok(String a)
