@@ -8,8 +8,8 @@
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
         className = "com.itshareplus.googlemapdemo.MapsActivity"/>
       <point      
-        x = "924"      
-        y = "404"/>
+        x = "760"      
+        y = "392"/>
     </statePointEntry>
   </locations>
 </navigationModel>
