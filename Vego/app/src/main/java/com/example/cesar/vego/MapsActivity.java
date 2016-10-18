@@ -33,11 +33,21 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.DialogInterface;
+import java.net.URLConnection;
+import java.net.URL;
+import java.io.BufferedReader;
+import java.io.Reader;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -187,9 +197,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(getBaseContext(),rb.getText(),Toast.LENGTH_LONG).show();
     }
 
-    public void findPath(View v)
-    {
-        String mensage ="Ubicacion: "+ markerOrigin.getPosition().longitude+"-"+markerOrigin.getPosition().latitude;
+    public void findPath(View v) {
+        String mensage = "Ubicacion: " + markerOrigin.getPosition().longitude + "-" + markerOrigin.getPosition().latitude;
         new AlertDialog.Builder(this)
                 .setTitle("Delete entry")
                 .setMessage(mensage)
@@ -205,6 +214,56 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+
+        btnFindPath = (Button) findViewById(R.id.btnFindPath);
+
+        btnFindPath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                HttpURLConnection connection = null;
+                BufferedReader reader = null;
+                String site = "https://nodeamica-demo.herokuapp.com/post";
+
+                try {
+
+                    URL url = new URL(site);
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.connect();
+
+
+                    InputStream stream = connection.getInputStream();
+
+                    reader = new BufferedReader(new InputStreamReader(stream));
+
+                    StringBuffer buffer = new StringBuffer();
+
+                    String line = "";
+                    while ((line = reader.readLine()) != null) {
+                        buffer.append(line);
+                    }
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e){
+                    e.printStackTrace();
+                }   finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            }
+        });
+
+
+
+
     }
     /**
      * Manipulates the map once available.
