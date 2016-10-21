@@ -48,7 +48,8 @@ import java.net.URLConnection;
 import java.net.URL;
 import java.io.BufferedReader;
 import java.io.Reader;
-
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -63,11 +64,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ProgressDialog progressDialog;
     private Marker markerOrigin;
     private Marker markerDestintion;
+    import com.finecalc.library.DatabaseHandler;
+    import com.finecalc.library.UserFunctions;
 
 
     private RadioGroup rg;
     private RadioButton rb;
 
+    private UserFunctions userFunction = new UserFunctions();
+    private JSONObject json = userFunction.loginUser(email, password);
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
