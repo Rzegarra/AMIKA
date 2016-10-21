@@ -222,7 +222,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v){
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
-                String site = "https://nodeamica-demo.herokuapp.com/post";
+                String site = "http://nodeamica-demo.herokuapp.com/post";
 
                 try {
 
@@ -237,7 +237,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     StringBuffer buffer = new StringBuffer();
 
-                    String line = "";
+                    String line = "haber conectate che";
                     while ((line = reader.readLine()) != null) {
                         buffer.append(line);
                     }
