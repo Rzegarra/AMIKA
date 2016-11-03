@@ -55,6 +55,7 @@ import java.io.BufferedReader;
 import java.io.Reader;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.example.cesar.testcomunicasionurl.Animal;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -132,4 +133,25 @@ public class MainActivity extends AppCompatActivity {
             tvData.setText(result);
         }
     }
+    /*
+    *Creando clase animal
+     */
+
+
+
+
+    /*
+    *Primero se implementa un metodo que cordine el retorno de los
+    * objetos de tipo animal(tipo que desees)
+    * Y debe crearse una instancia JsonReader
+     */
+    public List<Animal> readJsonStrea(InputStream in) throws IOException{
+        JsonReader reader = new JsonReader (new InputStreamReader(in, "UTF-8"));
+        try{
+            return leerArrayAnimales(reader);
+        } finally {
+            reader.close();
+        }
+    }
+
 }

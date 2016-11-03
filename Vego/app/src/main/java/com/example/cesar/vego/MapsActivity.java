@@ -7,6 +7,7 @@ import android.graphics.Path;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +51,7 @@ import java.io.BufferedReader;
 import java.io.Reader;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.google.code.gson;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -64,15 +66,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ProgressDialog progressDialog;
     private Marker markerOrigin;
     private Marker markerDestintion;
-    import com.finecalc.library.DatabaseHandler;
-    import com.finecalc.library.UserFunctions;
+
 
 
     private RadioGroup rg;
     private RadioButton rb;
 
-    private UserFunctions userFunction = new UserFunctions();
-    private JSONObject json = userFunction.loginUser(email, password);
+//    private UserFunctions userFunction = new UserFunctions();
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -128,6 +129,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .draggable(true)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
             */
+        //hcmus = markerOrigin.getPosition();
         markerOrigin = mMap.addMarker(new MarkerOptions()
                 .title("You are Aqui")
                 .position(hcmus)
@@ -137,7 +139,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerDestintion = mMap.addMarker(new MarkerOptions()
                 .title("You are here")
                 .position(hcmus_2)
-                .draggable(true)
+                .draggable(false)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -200,9 +202,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         int radionButtonId = rg.getCheckedRadioButtonId();
         rb = (RadioButton)findViewById(radionButtonId);
         Toast.makeText(getBaseContext(),rb.getText(),Toast.LENGTH_LONG).show();
+        /*    if(rb.getText()=="Start") {
+                markerOrigin = mMap.addMarker(new MarkerOptions()
+                        .title("You are Aqui")
+                        .draggable(true)
+                        .s
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+            }
+        markerDestintion.setVisible(false);
+            if(rb.getText()=="End") {
+
+                markerDestintion.setVisible(true);
+            }
+        markerOrigin.isVisible();*/
     }
 
+
+
     public void findPath(View v) {
+        Gson gson = new Gson();
+
+        int entero = 2;
+        Log.d("Formato Json entero",gson.toJson(entero));
+
+        String cadena ="Gson";
+        Log.d("Formato Json cadena",gson.toJson(cadena));
+
+        int arreglo[] ={1,2,3,4};
+        Log.d("Formato Json arreglo",gson.toJson(arreglo));
+
         String mensage = "Ubicacion: " + markerOrigin.getPosition().longitude + "-" + markerOrigin.getPosition().latitude;
         new AlertDialog.Builder(this)
                 .setTitle("Delete entry")
@@ -219,56 +248,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
-
-        btnFindPath = (Button) findViewById(R.id.btnFindPath);
-
-        btnFindPath.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                HttpURLConnection connection = null;
-                BufferedReader reader = null;
-                String site = "http://nodeamica-demo.herokuapp.com/post";
-
-                try {
-
-                    URL url = new URL(site);
-                    connection = (HttpURLConnection) url.openConnection();
-                    connection.connect();
-
-
-                    InputStream stream = connection.getInputStream();
-
-                    reader = new BufferedReader(new InputStreamReader(stream));
-
-                    StringBuffer buffer = new StringBuffer();
-
-                    String line = "haber conectate che";
-                    while ((line = reader.readLine()) != null) {
-                        buffer.append(line);
-                    }
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e){
-                    e.printStackTrace();
-                }   finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            }
-        });
-
-
-
-
     }
     /**
      * Manipulates the map once available.
