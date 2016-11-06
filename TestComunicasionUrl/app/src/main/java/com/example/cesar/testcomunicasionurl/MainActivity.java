@@ -56,7 +56,8 @@ import java.io.Reader;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.example.cesar.testcomunicasionurl.Animal;
-
+import com.google.gson.stream.JsonReader;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -145,13 +146,6 @@ public class MainActivity extends AppCompatActivity {
     * objetos de tipo animal(tipo que desees)
     * Y debe crearse una instancia JsonReader
      */
-    public List<Animal> readJsonStrea(InputStream in) throws IOException{
-        JsonReader reader = new JsonReader (new InputStreamReader(in, "UTF-8"));
-        try{
-            return leerArrayAnimales(reader);
-        } finally {
-            reader.close();
-        }
-    }
+
 
 }

@@ -1,7 +1,16 @@
 package com.example.cesar.testcomunicasionurl;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.String;
+import com.google.gson.Gson;
+import com.google.gson.*;
+import java.io.IOException;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.google.gson.stream.JsonReader;
 /**
  * Created by Cesar on 03/11/2016.
  */
@@ -46,12 +55,11 @@ public class Animal {
     * busca de los valores que se refieran a una clave.
      */
 
-    public Animal leerAnimal(JsonReader reader) throws IOExeption{
+    public Animal leerAnimal(JsonReader reader) throws IOException{
         String especie = null;
         String descripcion = null;
         String imagen = null;
-
-        reader.beginOject(),
+        reader.beginObject();
         while (reader.hasNext()){
             String name = reader.nextName();
             switch (name){
@@ -73,4 +81,55 @@ public class Animal {
         reader.endObject();
         return new Animal(especie, descripcion, imagen);
     }
+
+    /*
+    *Se creo la funcion leerArrayAnimales() para recorrer todo
+    * el array enviado desde el servidor.
+    * Recibe como parametro el lector Json para continuar
+    * la labor de lectura.
+    * Luego se apunta al primer elemento del array con el
+    * metodo beginArray(), lo que permite leer con el bucle
+    * while y luego con el elemento hasNext().
+     */
+    public List leerArrayAnimales(JsonReader reader) throws IOException{
+        //List temporal
+        ArrayList animales = new ArrayList();
+
+        reader.beginObject();
+        while(reader.hasNext())
+            animales.add(leerAnimal(reader));
+        reader.endArray();
+        return  animales;
+    }
+
+        /*
+    *Primero se implementa un metodo que cordine el retorno de los
+    * objetos de tipo animal(tipo que desees)
+    * Y debe crearse una instancia JsonReader
+     */
+
+    public List<Animal> readJsonStrea(InputStream in) throws IOException{
+        //nueva instancia JsonReader
+        JsonReader reader = new JsonReader (new InputStreamReader(in, "UTF-8"));
+
+        try{
+            //leer array
+            return leerArrayAnimales(reader);
+        } finally {
+            reader.close();
+        }
+    }
+    /*
+    public List<Animal> readJsonStream(InputStreamReader in) throws IOException{
+        //nueva instancia JsonReader
+        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+        try {
+            //leer array
+            return  leerArrayAnimales(reader);
+        } finally {
+            reader.close();
+        }
+
+    }*/
+
 }
