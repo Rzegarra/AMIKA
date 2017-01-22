@@ -51,7 +51,7 @@ import java.io.BufferedReader;
 import java.io.Reader;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.google.code.gson;
+//import com.google.code.gson;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -219,36 +219,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+/**
+        public void findPath(View v) {
+            Gson gson = new Gson();
 
-    public void findPath(View v) {
-        Gson gson = new Gson();
+            int entero = 2;
+            Log.d("Formato Json entero",gson.toJson(entero));
 
-        int entero = 2;
-        Log.d("Formato Json entero",gson.toJson(entero));
+            String cadena ="Gson";
+            Log.d("Formato Json cadena",gson.toJson(cadena));
 
-        String cadena ="Gson";
-        Log.d("Formato Json cadena",gson.toJson(cadena));
+            int arreglo[] ={1,2,3,4};
+            Log.d("Formato Json arreglo",gson.toJson(arreglo));
 
-        int arreglo[] ={1,2,3,4};
-        Log.d("Formato Json arreglo",gson.toJson(arreglo));
+            String mensage = "Ubicacion: " + markerOrigin.getPosition().longitude + "-" + markerOrigin.getPosition().latitude;
+            new AlertDialog.Builder(this)
+                    .setTitle("Delete entry")
+                    .setMessage(mensage)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }*/
 
-        String mensage = "Ubicacion: " + markerOrigin.getPosition().longitude + "-" + markerOrigin.getPosition().latitude;
-        new AlertDialog.Builder(this)
-                .setTitle("Delete entry")
-                .setMessage(mensage)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
-    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
